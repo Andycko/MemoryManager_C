@@ -2,6 +2,8 @@
 #include "mymemory.h"
 
 int main(void) {
-  printf("Hello World\n");
+	initialize();
+	printsegmenttable();
+	printmemory();
   return 0;
 }

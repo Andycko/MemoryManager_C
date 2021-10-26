@@ -14,13 +14,6 @@
 Byte        mymemory [MAXMEM] ;
 Segment_t * segmenttable = NULL;
 
-int main() {
-	printf("segmenttable -> %p\n", segmenttable);
-	initialize();
-	printsegmenttable();
-	return 1;
-}
-
 void initialize ()
 {
    printf ( "initialize> start\n");
@@ -89,6 +82,44 @@ int isPrintable ( int c )
 
 void printmemory ()
 {
+	// a buffer will be used for printing 10 elements per line
+	Byte buffer[10];
+
+	// loop through the memory array
+	for (int i = 0; i < sizeof mymemory / sizeof *mymemory; i++) {
+		
+		// when we fill up the buffer
+		if(i != 0 & i % 10 == 0) {
+			printf("[%4d] ", i-10);
+		
+			// print out hex
+			for(int j = 0; j < 10; j++) {
+				printf("%02x ", buffer[j]);
+			}
+
+			printf("| ");
+			
+			// print out chars
+			for(int j = 0; j < 10; j++) {
+				if(isPrintable(buffer[j]))
+					printf("%c", buffer[j]);
+				else
+					printf(".");
+			}
+			
+			printf("\n");
+		}
+		
+		// add byte to buffer 
+		buffer[i % 10] = mymemory[i];
+	}
+}
+
+void printsegmentdescriptor ( Segment_t * descriptor )
+{
+      printf ( "\tallocated = %s\n" , (descriptor->allocated == FALSE ? "FALSE" : "TRUE" ) ) ;
+      printf ( "\tstart     = %p\n" , descriptor->start ) ;
+      printf ( "\tsize      = %lu\n", descriptor->size  ) ;
 }
 
 void printsegmenttable()
@@ -101,9 +132,7 @@ void printsegmenttable()
 	printf("====== BEGIN SEGMENT TABLE ======\n");
 	while (1) {
 		printf("Segment %d\n", i);
-		printf("		allocated = %s\n", (currSegDesc.allocated) ? "TRUE" : "FALSE");
-		printf("		start     = %p\n", currSegDesc.start);
-		printf("		size      = %ld\n", currSegDesc.size);
+		printsegmentdescriptor(&currSegDesc);
 		
 		// break the loop if there is no next segment
 		if(!currSegDesc.next) break;
@@ -115,9 +144,3 @@ void printsegmenttable()
 	printf("====== END SEGMENT TABLE ======\n");
 }
 
-void printsegmentdescriptor ( Segment_t * descriptor )
-{
-      printf ( "\tallocated = %s\n" , (descriptor->allocated == FALSE ? "FALSE" : "TRUE" ) ) ;
-      printf ( "\tstart     = %p\n" , descriptor->start ) ;
-      printf ( "\tsize      = %lu\n", descriptor->size  ) ;
-}

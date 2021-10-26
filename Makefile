@@ -1,13 +1,10 @@
-all: main mymemory clean-o run
+all: main clean-o
 
-main: main.o
-	gcc -o main main.o
+main: main.o mymemory.o
+	gcc -o main main.o mymemory.o
 
 main.o: main.c
 	gcc -c main.c
-
-mymemory: mymemory.o
-	gcc -o mymemory mymemory.o
 
 mymemory.o: mymemory.c
 	gcc -c mymemory.c
@@ -19,6 +16,3 @@ clean:
 	rm -f main
 	rm -f mymemory
 	rm -f *.o
-
-run:
-	./mymemory
