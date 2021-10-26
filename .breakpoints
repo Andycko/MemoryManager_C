@@ -1,20 +1,3 @@
 {
-  "files": {
-    "Makefile": [
-      {
-        "id": "a3988923-edcb-4427-a164-d7c5782d8a47",
-        "line": 21,
-        "version": 216,
-        "index": 253
-      }
-    ],
-    "mymemory.c": [
-      {
-        "id": "c98f9f1d-60b0-4aac-81ad-6ca94d0d515a",
-        "line": 37,
-        "version": 3646,
-        "index": 862
-      }
-    ]
-  }
+  "files": {}
 }
