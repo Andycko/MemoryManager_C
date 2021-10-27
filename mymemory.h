@@ -47,6 +47,8 @@ void        insertAfter ( Segment_t *, Segment_t * ) ;
 // forward references, helper functions
 int isPrintable ( int c ) ;
 void printmemory () ;
+void printMemoryLine (int lineNum, Byte buffer[]);
 void printsegmenttable() ;
+Segment_t * setSegment(Segment_t * segment, Byte allocated, void * start, size_t size);
 
 #endif
