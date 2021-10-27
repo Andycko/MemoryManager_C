@@ -3,17 +3,31 @@
 #include "mymemory.h"
 
 int main(void) {
-	initialize();
-  
-  char * ptr1 = (char *) mymalloc ( 10 ) ;
-  strcpy (ptr1, "this test");
-  printf( "shell> content of allocated memory: %s\n", ptr1 ) ;
+	printf ( "shell> start\n");
 
-  char * ptr2 = (char *) mymalloc ( 10 ) ;
-  strcpy (ptr2, "this test");
-  printf( "shell> content of allocated memory: %s\n", ptr2 ) ;  
-  
-  printsegmenttable();
+	initialize();
+
+	char * ptr1 = (char *) mymalloc ( 10 );
+	strcpy (ptr1, "this test");
+	printf( "shell> content of allocated memory: %s\n", ptr1 );
+
+	char * ptr2 = (char *) mymalloc ( 10 );
+	strcpy (ptr2, "this test");
+	printf( "shell> content of allocated memory: %s\n", ptr2 );
+
 	printmemory();
-  return 0;
+	printsegmenttable();
+
+	myfree ( ptr1 );
+	
+	printmemory();
+	printsegmenttable();
+
+	myfree ( ptr2 );
+
+	printmemory();
+	printsegmenttable();
+
+	printf ( "shell> end\n");
+	return 0;
 }

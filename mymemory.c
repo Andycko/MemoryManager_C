@@ -70,8 +70,18 @@ void * mymalloc ( size_t size )
 
 void myfree ( void * ptr )
 {
-   printf ( "myfree> start\n");
+	// Look for the segment that needs to be freed
+	Segment_t * segToFree = findSegment(segmenttable, ptr);
+	if (segToFree == NULL) return;
 
+	// loop through the memory which is occupied by the segment and reset to 0s
+	for (int i = 0; i < segToFree->size; i++) {
+		Byte * tmp = segToFree->start + i;
+		*tmp = '\0';
+	}
+
+	// set allocated to false
+	segToFree->allocated = FALSE;
 }
 
 void mydefrag ( void ** ptrlist)
@@ -86,9 +96,9 @@ Segment_t * findFree ( Segment_t * list, size_t size )
 {
   Segment_t * curr = segmenttable;
   while (curr != NULL) {
-    if (curr->allocated == FALSE && curr->size >= size) {
+    if (curr->allocated == FALSE && curr->size >= size)
       return curr;
-    }
+
     curr = curr->next;
   }
   return NULL;
@@ -104,6 +114,13 @@ void insertAfter ( Segment_t * oldSegment, Segment_t * newSegment )
 
 Segment_t * findSegment ( Segment_t * list, void * ptr )
 {
+	// start looping through the segmenttable, until segment->start == ptr and return
+	Segment_t * curr = segmenttable;
+	while (curr != NULL) {
+		if (curr->start == ptr) return curr;
+		curr = curr->next;
+	}
+	return NULL;
 }
 
 int isPrintable ( int c )

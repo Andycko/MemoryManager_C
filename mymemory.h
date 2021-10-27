@@ -42,13 +42,14 @@ void        mydefrag   ( void ** ) ;
 
 // forward references, managing segmentation table
 Segment_t * findFree    ( Segment_t *, size_t      ) ;
+Segment_t * findSegment ( Segment_t *, void *      ) ;
 void        insertAfter ( Segment_t *, Segment_t * ) ;
 
 // forward references, helper functions
 int isPrintable ( int c ) ;
 void printmemory () ;
-void printMemoryLine (int lineNum, Byte buffer[]);
+void printMemoryLine (int, Byte []);
 void printsegmenttable() ;
-Segment_t * setSegment(Segment_t * segment, Byte allocated, void * start, size_t size);
+Segment_t * setSegment(Segment_t *, Byte, void *, size_t);
 
 #endif
