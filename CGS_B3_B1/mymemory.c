@@ -84,17 +84,10 @@ void myfree ( void * ptr )
 	segToFree->allocated = FALSE;
 }
 
-void mydefrag ( void ** ptrlist)
-{
-   printf ( "mydefrag> start\n");
-
-}
-
-
 // helper functions for management segmentation table
 Segment_t * findFree ( Segment_t * list, size_t size )
 {
-  Segment_t * curr = segmenttable;
+  Segment_t * curr = list;
   while (curr != NULL) {
     if (curr->allocated == FALSE && curr->size >= size)
       return curr;
@@ -115,7 +108,7 @@ void insertAfter ( Segment_t * oldSegment, Segment_t * newSegment )
 Segment_t * findSegment ( Segment_t * list, void * ptr )
 {
 	// start looping through the segmenttable, until segment->start == ptr and return
-	Segment_t * curr = segmenttable;
+	Segment_t * curr = list;
 	while (curr != NULL) {
 		if (curr->start == ptr) return curr;
 		curr = curr->next;

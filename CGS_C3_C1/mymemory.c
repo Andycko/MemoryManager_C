@@ -68,23 +68,10 @@ void * mymalloc ( size_t size )
   return freeSeg->start;
 }
 
-void myfree ( void * ptr )
-{
-   printf ( "myfree> start\n");
-
-}
-
-void mydefrag ( void ** ptrlist)
-{
-   printf ( "mydefrag> start\n");
-
-}
-
-
 // helper functions for management segmentation table
 Segment_t * findFree ( Segment_t * list, size_t size )
 {
-  Segment_t * curr = segmenttable;
+  Segment_t * curr = list;
   while (curr != NULL) {
     if (curr->allocated == FALSE && curr->size >= size)
       return curr;
@@ -100,10 +87,6 @@ void insertAfter ( Segment_t * oldSegment, Segment_t * newSegment )
   Segment_t * tmpPointer = oldSegment->next;
   oldSegment->next = newSegment;
   newSegment->next = tmpPointer;
-}
-
-Segment_t * findSegment ( Segment_t * list, void * ptr )
-{
 }
 
 int isPrintable ( int c )

@@ -39,40 +39,6 @@ void initialize ()
    printf ( "initialize> end\n");
 }
 
-void * mymalloc ( size_t size )
-{
-   printf ( "mymalloc> start\n");
-
-   // implement the mymalloc functionality
-}
-
-void myfree ( void * ptr )
-{
-   printf ( "myfree> start\n");
-
-}
-
-void mydefrag ( void ** ptrlist)
-{
-   printf ( "mydefrag> start\n");
-
-}
-
-
-// helper functions for management segmentation table
-Segment_t * findFree ( Segment_t * list, size_t size )
-{
-	printf ( "findFree> start\n");
-}
-
-void insertAfter ( Segment_t * oldSegment, Segment_t * newSegment )
-{
-}
-
-Segment_t * findSegment ( Segment_t * list, void * ptr )
-{
-}
-
 int isPrintable ( int c )
 {
    if ( c >= 0x20 && c <= 0x7e ) return c ;
